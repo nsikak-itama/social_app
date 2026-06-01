@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-              Text("Don't have an account?"),
+              Text("Don't have an account?"), 
               GestureDetector(
                 onTap: widget.onTap,
                 child: Text("Sign Up", style: TextStyle(color: Colors.blue))

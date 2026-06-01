@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:social_app/components/My_Button.dart';
+import 'package:social_app/components/My_button.dart';
 import 'package:social_app/components/My_text_field.dart';
 import 'package:social_app/responsive/constrained_scaffold.dart';
 import 'package:social_app/services/auth/auth_service.dart';
