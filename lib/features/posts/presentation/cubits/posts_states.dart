@@ -19,3 +19,4 @@ class PostsError extends PostState{
   PostsError(this.message);
 }
 
+ 

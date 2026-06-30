@@ -11,4 +11,4 @@ ThemeData lightMode = ThemeData(
     onPrimaryFixed: Colors.grey.shade700,
     secondaryContainer: Colors.blue.shade600
   )
-);  
+);   

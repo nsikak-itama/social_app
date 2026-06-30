@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/cubits/profile_states.dart';
-import 'package:social_app/features/storage/storage_repo.dart';
+import 'package:social_app/features/storage/storage_repo.dart'; 
 import 'package:social_app/models/profile_user.dart';
 import 'package:social_app/services/profile/profile_servies.dart';
 

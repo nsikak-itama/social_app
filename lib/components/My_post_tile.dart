@@ -27,6 +27,20 @@ class MyPostTile extends StatefulWidget {
 }
 
 class _MyPostTileState extends State<MyPostTile> {
+  String _formatTime(DateTime time){
+    final currentTime = DateTime.now();
+    final diff = currentTime.difference(time);
+
+    if(diff.inSeconds < 60) return 'just now';
+    if(diff.inMinutes < 60) return '${diff.inMinutes}minutes ago';
+    if(diff.inHours < 24) return '${diff.inHours}hours ago';
+    if(diff.inDays < 7) return '${diff.inDays}days ago ';
+    if(diff.inDays < 30) return '${(diff.inDays/7).floor()}w ago ';
+    if(diff.inDays < 365) return '${(diff.inDays/30).floor()} mo ago';
+
+    return '${(diff.inDays / 365).floor()}y ago';
+  }
+
   late final ProfileCubit _cubit;
   late final postCubit = context.read<PostCubit>();
   late final profileCubit = context.read<ProfileCubit>();
@@ -250,7 +264,9 @@ class _MyPostTileState extends State<MyPostTile> {
                   ),
                 ),
                 Spacer(),
-                Text(widget.post.timestamp.toString())
+                Text(
+                  _formatTime(widget.post.timestamp)
+                )
               ],
             ),
           ),
@@ -313,4 +329,8 @@ class _MyPostTileState extends State<MyPostTile> {
       ),
     );
   }
+}
+
+extension on Timestamp {
+  operator -(String other) {}
 }

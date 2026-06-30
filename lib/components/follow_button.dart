@@ -5,12 +5,12 @@ class FollowButton extends StatelessWidget {
   final bool isFollowing;
   const FollowButton({super.key, required this.onPressed, required this.isFollowing});
 
-  @override
+  @override 
   Widget build(BuildContext context) {
     return Padding( 
-      padding: const EdgeInsets.symmetric(horizontal: 25),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12), 
         child: MaterialButton(
           onPressed: onPressed,
           padding: EdgeInsets.all(25),

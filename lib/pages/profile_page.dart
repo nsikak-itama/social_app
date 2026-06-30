@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/components/My_post_tile.dart';
 import 'package:social_app/components/bio_box.dart';
 import 'package:social_app/components/follow_button.dart';
+import 'package:social_app/components/message_button.dart';
 import 'package:social_app/components/profile_stats.dart';
 import 'package:social_app/cubits/profile_cubits.dart';
 import 'package:social_app/cubits/profile_states.dart';
@@ -13,8 +14,10 @@ import 'package:social_app/features/auth/domain/entities/app_user.dart';
 import 'package:social_app/features/posts/presentation/cubits/post_cubits.dart';
 import 'package:social_app/features/posts/presentation/cubits/posts_states.dart';
 import 'package:social_app/models/profile_user.dart';
+import 'package:social_app/pages/chat_page.dart';
 import 'package:social_app/pages/edit_profile_page.dart';
 import 'package:social_app/pages/follower_page.dart';
+import 'package:social_app/responsive/constrained_scaffold.dart';
 import 'package:social_app/services/auth/auth_service.dart';
 import 'package:social_app/services/profile/profile_firebase_repo.dart';
 
@@ -52,7 +55,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
     setState(() {
       
-    isOwnProfile = (widget.userId == currentUser?.uid);
+    isOwnProfile = (widget.userId == currentUser?.uid); 
     });
 
   } 
@@ -82,9 +85,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
         // loaded
         if(state is ProfileLoaded){
-            return Scaffold(
+            return ConstrainedScaffold(
             appBar: AppBar(
-              title: Text(state.profileUser.name),
+              title: Text(state.profileUser.name, style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),),
               centerTitle: true,
               foregroundColor: Theme.of(context).colorScheme.primary,
 
@@ -141,9 +144,25 @@ class _ProfilePageState extends State<ProfilePage> {
                 SizedBox(height: 25),
 
                 if(!isOwnProfile && currentUser != null)
-                FollowButton(
-                  onPressed: followButtonPressed,
-                  isFollowing: state.profileUser.followers.contains(currentUser!.uid),
+                Row(
+                  children: [
+                    Expanded(
+                      child: FollowButton(
+                        onPressed: followButtonPressed,
+                        isFollowing: state.profileUser.followers.contains(currentUser!.uid),
+                      ),
+                    ),
+                    Expanded(
+                      child: MessageButton(
+                        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage(
+                          receiverEmail: state.profileUser.email, 
+                          receiverName: state.profileUser.name,
+                          receiverId: state.profileUser.uid,
+                        ))), 
+                        isFollower: state.profileUser.followers.contains(currentUser!.uid),
+                      ),
+                    )
+                  ],
                 ),
 
                 SizedBox(height: 25),
@@ -205,7 +224,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   }
                 })
               ],
-            ),
+            ), backgroundColor: Theme.of(context).colorScheme.background,
           );
         }
 

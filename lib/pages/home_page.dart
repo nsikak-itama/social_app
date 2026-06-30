@@ -22,7 +22,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late final cubit = context.read<PostCubit>();
-
+ 
   @override
   void initState() {
     // TODO: implement initState
@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                   },
                 );
           }
-
+ 
           else if(state is PostsError){
             return Center(
               child: Text(state.message),

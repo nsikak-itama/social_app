@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/cubits/profile_cubits.dart';
+import 'package:social_app/features/chat/cubits/chat_cubits.dart';
+import 'package:social_app/features/chat/cubits/chat_list_cubit.dart';
+import 'package:social_app/features/chat/data/firebase_chat_repo.dart';
 import 'package:social_app/features/posts/data/firebase_post_repo.dart';
 import 'package:social_app/features/posts/presentation/cubits/post_cubits.dart';
 import 'package:social_app/features/search/cubits/search_cubits.dart';
@@ -27,7 +30,8 @@ void main() async{
         BlocProvider(create: (context) => ProfileCubit(storageRepo: FirebaseStorageRepo(), profileRepo: FirebaseProfileRepo())),
         BlocProvider(create: (context) => PostCubit(postRepo: FirebasePostRepo(), storageRepo: FirebaseStorageRepo())),
         BlocProvider(create: (context) => SearchCubits(searchRepo: FirebaseSearchRepo())),
-        BlocProvider(create: (context) => ThemeCubit())
+        BlocProvider(create: (context) => ChatCubit(chatRepo: FirebaseChatRepo())),
+        BlocProvider(create: (context) =>  ChatListCubit(chatRepo: FirebaseChatRepo()))
   ],
   child: MyApp(),
   ));
