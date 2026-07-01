@@ -102,9 +102,9 @@ class _FollowerPageState extends State<FollowerPage> {
                 user: user, 
                 isFollowing: currentUserProfile?.following.contains(user.uid) ?? false, 
                 isOwnProfile: user.uid == widget.currentUserId, 
-                onTapFollow: followPressed,
+                onTapFollow: () => handleFollow(user.uid),
               );
-                }
+                } 
               );
             } else if(snapshot.connectionState == ConnectionState.waiting){
               return ListTile(
